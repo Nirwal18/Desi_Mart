@@ -3,39 +3,23 @@ package com.nirwal.desimart
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.nirwal.desimart.ui.composable.*
+import androidx.navigation.compose.rememberNavController
+import com.nirwal.desimart.ui.composable.MainPage
+import com.nirwal.desimart.ui.navigation.MainNavHost
 import com.nirwal.desimart.ui.theme.DesiMartTheme
 
 class MainActivity : ComponentActivity() {
 
-    //val isFirstTime :Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             DesiMartTheme {
-                val isFirstTime = remember{mutableStateOf(true)}
-
-                if(isFirstTime.value){
-                    OnBoardingPage(onFinish = {
-                        isFirstTime.value=false
-                    })
-                }else{
-                    MainPage()
-                }
+                val navController = rememberNavController()
+               MainNavHost(navController = navController)
             }
         }
-    }
-
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-
     }
 }
 
@@ -44,6 +28,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     DesiMartTheme {
-        MainPage()
+        MainPage(rememberNavController(), rememberNavController())
     }
 }

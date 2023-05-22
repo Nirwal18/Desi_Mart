@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,9 +18,12 @@ import androidx.compose.ui.unit.dp
 import com.nirwal.desimart.R
 
 @Composable
-fun MyTopAppBar(title:String){
+fun MyTopAppBar(title:String, onBackClick:()->Unit){
     TopAppBar(
         title = { Text(text = title) },
+        navigationIcon = { IconButton(onClick = onBackClick) {
+            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+        }},
         backgroundColor = Color.White,
         elevation = 4.dp,
     )

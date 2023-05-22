@@ -7,64 +7,64 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.material.*
 import androidx.compose.material.ButtonDefaults.buttonColors
 import androidx.compose.material.ButtonDefaults.outlinedButtonColors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import com.nirwal.desimart.R
+import com.nirwal.desimart.MyDataStore
 import com.nirwal.desimart.model.OnBoardingData
 import com.nirwal.desimart.model.onBoardingDataItems
+import com.nirwal.desimart.ui.navigation.MyNavGraph
 import com.nirwal.desimart.ui.theme.BottomCardShape
-import com.nirwal.desimart.ui.theme.ColorBlue
-import com.nirwal.desimart.ui.theme.orangish
-import com.nirwal.desimart.ui.theme.purplish
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.selects.select
-import java.util.ArrayList
 
-@OptIn(ExperimentalPagerApi::class)
 @Preview(showBackground = true)
 @Composable
 fun OnBoardingDataPreview() {
-    OnBoardingPage(onFinish = {})
+    OnBoardingPage(rememberNavController())
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun OnBoardingPage(onFinish: () -> Unit){
+fun OnBoardingPage(navController:NavHostController){
+    val dataStore = MyDataStore(LocalContext.current)
+    val scope = rememberCoroutineScope()
    Surface(modifier = Modifier.fillMaxSize()) {
        val items = onBoardingDataItems()
-
-    val pagerState = rememberPagerState(initialPage = 0)
+       val pagerState = rememberPagerState(initialPage = 0)
 
        OnBoardingPager(
            items = items,
            pagerState = pagerState,
            modifier = Modifier.fillMaxWidth(),
-           onFinish = {onFinish()}
+           onFinish = {
+               scope.launch {
+                   dataStore.saveBoolean("is_first_time",false)
+               }
+               navController.popBackStack()
+               navController.navigate(MyNavGraph.MainScreen.route)
+           }
        )
    }
 
