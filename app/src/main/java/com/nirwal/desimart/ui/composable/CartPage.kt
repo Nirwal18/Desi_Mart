@@ -31,7 +31,7 @@ fun CartPagePreview(){
 fun CartPage(){
 
     Column {
-        MyTopAppBar(title = "Cart")
+        MyTopAppBar(title = "Cart",{})
         CartItems()
 
     }

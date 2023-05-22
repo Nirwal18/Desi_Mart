@@ -30,7 +30,7 @@ fun BestSellerPage() {
     Column {
 
 
-        MyTopAppBar(title = "Best Seller")
+        MyTopAppBar(title = "Best Seller", onBackClick = {})
         LazyColumn() {
             item {
                 ProductItemView()

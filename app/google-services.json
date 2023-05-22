@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "579757543222",
+    "firebase_url": "https://androbox-nirwal.firebaseio.com",
+    "project_id": "androbox-nirwal",
+    "storage_bucket": "androbox-nirwal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579757543222:android:25e6576bd9dd0e21832d97",
+        "android_client_info": {
+          "package_name": "com.nirwal.desimart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579757543222-aep5c76v6sb8k16o6ph0v5198h6jep6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_LAGmRZwFZv-0cWqAlRp7E6D0Ycyn3oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579757543222-aep5c76v6sb8k16o6ph0v5198h6jep6v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

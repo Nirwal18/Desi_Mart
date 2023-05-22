@@ -38,12 +38,12 @@ fun MainTheme(content: @Composable () -> Unit) {
 @Composable
 fun DefaultPreview() {
     MainTheme {
-        HomeScreen(navController = rememberNavController())
+        HomeScreen({},{})
     }
 }
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(onBestSellerSectionClick: () -> Unit,onCategoryClick: () -> Unit) {
     Box(Modifier.verticalScroll(rememberScrollState())) {
         Image(
             modifier = Modifier
@@ -55,7 +55,7 @@ fun HomeScreen(navController: NavHostController) {
         )
         Column {
             AppBar()
-            Content(navController)
+            Content(onBestSellerSectionClick = onBestSellerSectionClick, onCategoryClick = onCategoryClick)
         }
     }
 }
@@ -96,16 +96,16 @@ fun AppBar() {
 }
 
 @Composable
-fun Content(navController: NavHostController) {
+fun Content(onBestSellerSectionClick:()->Unit, onCategoryClick:()->Unit) {
 
     Column() {
         Header()
         Spacer(modifier = Modifier.height(16.dp))
         Promotions()
         Spacer(modifier = Modifier.height(16.dp))
-        CategorySection(navController)
+        CategorySection(onClick = onCategoryClick)
         Spacer(modifier = Modifier.height(16.dp))
-        BestSellerSection(navController)
+        BestSellerSection(onClick = onBestSellerSectionClick)
     }
 }
 
@@ -258,7 +258,7 @@ fun PromotionItem(
 }
 
 @Composable
-fun CategorySection(navController:NavHostController) {
+fun CategorySection(onClick: () -> Unit) {
     Column(Modifier.padding(horizontal = 16.dp)) {
         Row(
             Modifier.fillMaxWidth(),
@@ -266,9 +266,7 @@ fun CategorySection(navController:NavHostController) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(text = "Category", style = MaterialTheme.typography.h6)
-            TextButton(onClick = {
-                navController.navigate("category")
-            }) {
+            TextButton(onClick = onClick) {
                 Text(text = "More", color = MaterialTheme.colors.primary)
             }
         }
@@ -328,7 +326,7 @@ fun CategoryButton(
 }
 
 @Composable
-fun BestSellerSection(navController:NavHostController) {
+fun BestSellerSection(onClick:()->Unit) {
     Column() {
         Row(
             Modifier
@@ -338,9 +336,7 @@ fun BestSellerSection(navController:NavHostController) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(text = "Best Sellers", style = MaterialTheme.typography.h6)
-            TextButton(onClick = {
-                navController.navigate("best_seller")
-            }) {
+            TextButton(onClick = onClick) {
                 Text(text = "More", color = MaterialTheme.colors.primary)
             }
         }
