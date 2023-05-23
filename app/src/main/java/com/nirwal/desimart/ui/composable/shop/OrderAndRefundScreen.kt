@@ -1,4 +1,4 @@
-package com.nirwal.desimart.composable.shop
+package com.nirwal.desimart.ui.composable.shop
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
@@ -12,6 +12,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import com.nirwal.desimart.composable.shop.OrderScreen
 import kotlinx.coroutines.launch
 
 
@@ -28,8 +29,7 @@ fun OrderAndRefundScreen() {
             OrderScreen()
         },
         TabRowItem(title = "Refunds", null){
-            //Refund Screen
-            Text(text = "Refunds")
+            RefundScreen()
         }
     )
     MyTabLayout(tabItemList = tabs )
@@ -43,9 +43,10 @@ fun MyTabLayout(tabItemList:List<TabRowItem>) {
     val pagerState = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f
-    ) {
-        tabItemList.size
-    }
+    )
+//    {
+//        tabItemList.size
+//    }
 
     val tabModifier = Modifier
 
@@ -68,6 +69,7 @@ fun MyTabLayout(tabItemList:List<TabRowItem>) {
         }
 
         HorizontalPager(
+            pageCount = tabItemList.size,
             state = pagerState,
         ) {
             tabItemList[pagerState.currentPage].screen()

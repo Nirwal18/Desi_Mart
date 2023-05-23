@@ -1,9 +1,5 @@
 package com.nirwal.desimart.ui.composable.shop
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.runtime.Composable
-import com.nirwal.desimart.ui.composable.MyTopAppBar
-
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +19,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Percent
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -43,7 +38,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -52,11 +46,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.nirwal.desimart.R
-import com.nirwal.desimart.model.CartItem
-import com.nirwal.desimart.ui.component.Minus
-import com.nirwal.desimart.ui.component.MyTopBar
-import com.nirwal.desimart.ui.viewModel.MainViewModel
+import com.nirwal.desimart.common.Minus
+import com.nirwal.desimart.ui.composable.CartItem
+import com.nirwal.desimart.ui.composable.CartUiState
+import com.nirwal.desimart.ui.composable.MainViewModel
+import com.nirwal.desimart.ui.composable.MyTopAppBar
 
 @Composable
 fun ShoppingCartScreen(onBack:()->Unit) {
@@ -72,7 +66,7 @@ fun ShoppingCartScreen(onBack:()->Unit) {
 @Preview(showBackground = true)
 @Composable
 fun CartScreenDefaultPreview() {
-CartScreen(onBackClick = {}, state = MainViewModel.CartUiState(),{ _, _-> })
+CartScreen(onBackClick = {}, state = CartUiState(),{ _, _-> })
 
 }
 
@@ -80,13 +74,13 @@ CartScreen(onBackClick = {}, state = MainViewModel.CartUiState(),{ _, _-> })
 @Composable
 fun CartScreen(
     onBackClick:()->Unit,
-    state: MainViewModel.CartUiState,
+    state: CartUiState,
     cartUpdateEvent:(Int, Int)->Unit
 ) {
 
 
     Box(modifier = Modifier.fillMaxSize()){
-        MyTopBar(title = "Cart", iconBack = Icons.Default.ArrowBack, onBackClick = onBackClick)
+        //MyTopBar(title = "Cart", iconBack = Icons.Default.ArrowBack, onBackClick = onBackClick)
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -258,6 +252,8 @@ fun Basket(modifier: Modifier= Modifier, cartItems: List<CartItem>, onCartUpdate
     }
 }
 
+
+
 @Composable
 fun AddRemoveControl(count:Int, onAdd:()->Unit, onSubtract:()->Unit) {
 
@@ -304,8 +300,8 @@ fun BasketItem(title:String, itemQty:Int,imageUrl:String, onQuantityUpdate:(Int)
                     .data(imageUrl)
                     .crossfade(true)
                     .build(),
-                placeholder = painterResource(R.drawable.baseline_image),
-                fallback = painterResource(R.drawable.baseline_image),
+                //placeholder = painterResource(R.drawable.baseline_image),
+               // fallback = painterResource(R.drawable.baseline_image),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

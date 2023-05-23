@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.nirwal.desimart.ui.composable.HomeScreen
 import com.nirwal.desimart.ui.composable.shop.CategoryScreen
+import com.nirwal.desimart.ui.composable.shop.OrderAndRefundScreen
 
 @Composable
 fun HomeNavGraphView(
@@ -40,7 +41,7 @@ fun HomeNavGraphView(
             //SettingScreen(navController)
         }
         composable(route = BottomBarScreen.Order.route){
-            //SettingScreen(navController)
+            OrderAndRefundScreen()
         }
     }
 }
