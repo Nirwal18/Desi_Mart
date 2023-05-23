@@ -28,8 +28,7 @@ fun OrderAndRefundScreen() {
             OrderScreen()
         },
         TabRowItem(title = "Refunds", null){
-            //Refund Screen
-            Text(text = "Refunds")
+            RefundScreen()
         }
     )
     MyTabLayout(tabItemList = tabs )
